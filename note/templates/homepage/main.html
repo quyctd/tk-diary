@@ -1,0 +1,35 @@
+<div class="container" style="margin-top:100px;">
+    <div class="row">
+        <div class="col-sm-8 px-5">
+            {% for class in classrooms %}
+            <div>
+                <a href="/class/{{class.pk}}" class="mb-3">
+                    <i class="fas fa-caret-right"></i>
+                    {{ class }}
+                </a>
+                <!-- <p>{{ note.note_summary|safe|truncatewords_html:40 }}</p>
+                <button class="btn btn-primary">Continue Reading</button>
+                <p class="mb-4"></p>
+                <small>Người viết: {{note.author.first_name}} {{note.author.last_name}} | Khóa học: {{ note.classroom.name_course }}</small> -->
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <div class="from-group mb-4">
+                <p class="font-weight-bold">Tìm kiếm</p>
+                <input class="form-control w-100" type="text" placeholder="Nhập tên lớp" name="" id="">
+            </div>
+            <div class="mt-4">
+                <p class="font-weight-bold">Note theo ngày</p>
+                <ul>
+                    {% for date in date_list %}
+                        <a href="">
+                            <li>{{date}}</li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

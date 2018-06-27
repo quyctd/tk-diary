@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  {% include "partial/meta-data.html" %}
+  <link rel="stylesheet" href="../../static/css/login.css">
+</head>
+<body>
+  <div class="login-page">
+    <div class="form">
+      <form class="register-form" method='post'>
+        {% csrf_token %} {% for field in uform %}
+        <p style="text-align:left;">{{field.label_tag}}</p>
+        {{field}} {% for error in field.errors %}
+        <small style="color: grey">{{ field.help_text|safe }}</small>
+        <p style="color: red">{{ error }}</p>
+        {% endfor %} {% endfor %}
+        <button type="submit">create</button>
+        <p class="message">Already registered?
+          <a href="/login">Sign In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+

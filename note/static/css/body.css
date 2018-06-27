@@ -1,0 +1,33 @@
+body {
+    background: #FDFDFD;
+    font-family: 'Open Sans',
+    sans-serif;
+}
+
+.my-container {
+    width: 100%;
+    padding-right: 18%;
+    padding-left: 18%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header-container {
+    width: 100%;
+    padding-right: 30%;
+    padding-left: 30%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.my-color {
+    color: #57aecc;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h5.ques-title:hover {
+    color: #57aecc!important;
+}
