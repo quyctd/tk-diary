@@ -6,6 +6,10 @@ from note.models import Class, Diary, NotePrecise, UserProfile
 class NotePreciseInline(admin.StackedInline):
     model = NotePrecise
     extra = 1
+    verbose_name = "Note for each Student"
+
+class ClassAdmin(admin.ModelAdmin):
+    verbose_name = "Classroom"
 
 class DiaryAdmin(admin.ModelAdmin):
     inlines = [NotePreciseInline,]
@@ -26,7 +30,7 @@ class DiaryAdmin(admin.ModelAdmin):
         request.GET = data
         return super(DiaryAdmin, self).add_view(request, form_url="", extra_context=extra_context)
 
-admin.site.register(Class)
+admin.site.register(Class, ClassAdmin)
 admin.site.register(Diary, DiaryAdmin)
 admin.site.register(NotePrecise)
 admin.site.register(UserProfile)

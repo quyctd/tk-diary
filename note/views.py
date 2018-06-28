@@ -7,6 +7,7 @@ from .forms import SignUpForm
 def index(request):
     classrooms = Class.objects.all()
     date_list = [d.time for d in Diary.objects.all()]
+    date_list = sorted(date_list)
     context = {
         'classrooms': classrooms,
         'date_list': date_list
@@ -17,7 +18,7 @@ def index(request):
 def detail(request, pk):
     classroom = get_object_or_404(Class, pk = pk)
     if classroom != None:
-        notes = classroom.diary.all()
+        notes = classroom.diary.all().order_by('-time')
 
     context = {
         'classroom': classroom,

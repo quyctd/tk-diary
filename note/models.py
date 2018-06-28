@@ -14,6 +14,9 @@ class Class(models.Model):
     support = models.CharField(max_length = 255, blank = True)
     def __str__(self):
         return self.name_course+" "+str(self.number)
+    class Meta:
+        verbose_name = 'Class'
+        verbose_name_plural = 'Classrooms'
 
 class Diary(models.Model):
     author = models.ForeignKey('auth.User', on_delete = models.CASCADE)
@@ -24,6 +27,10 @@ class Diary(models.Model):
     def __str__(self):
         return self.classroom.name_course +" "+str(self.classroom.number) +" - "+ datetime.strftime(self.time, "%d/%m/%Y")
 
+    class Meta:
+        verbose_name = 'Diary'
+        verbose_name_plural = 'Diaries'
+
 class NotePrecise(models.Model):
     for_student = models.CharField(max_length = 255)
     diary = models.ForeignKey(Diary, on_delete = models.CASCADE, related_name='note_precise')
@@ -31,7 +38,9 @@ class NotePrecise(models.Model):
 
     def __str__(self):
         return self.for_student +" "+ self.diary.classroom.name_course +" "+ str(self.diary.classroom.number)
-
+    class Meta:
+        verbose_name = 'Note Precise'
+        verbose_name_plural = 'Note for each Student'
 
 class UserProfile(models.Model):
     user   = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
