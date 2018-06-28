@@ -50,4 +50,4 @@ class UserProfile(models.Model):
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-    instance.user_profile.save()
+    instance.userprofile.save()

@@ -10,10 +10,12 @@
                 <a class="nav-link" href="/">Home
                 </a>
             </li>
+            {% if user.is_staff %}
             <li class="nav-item">
                 <a class="nav-link" href="/admin">Admin Page
                 </a>
             </li>
+            {% endif %}
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Nhật ký theo khóa học
@@ -25,12 +27,21 @@
             </li> -->
         </ul>
         <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+            <li class="nav-item mr-2">
+                <a class="nav-link">Xin chào, {{ user.username }}</a>
+            </li>
+            <li class="nav-item mr-2">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        {% else %}
             <li class="nav-item mr-2">
                 <a class="nav-link" href="/login">Login</a>
             </li>
             <li class="mr-2 nav-item">
                 <a class="nav-link" href="/signup">Signup</a>
             </li>
+        {% endif %}
         </ul>
     </div>
 </nav>

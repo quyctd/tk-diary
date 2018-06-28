@@ -16,8 +16,25 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include, url
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('note.urls')),
+
+    url(r'^login/$', 
+        auth_views.login, 
+        {'template_name': 'registration/login.html'},
+        name='login'
+    ),
+    url(r'^logout/$', 
+        auth_views.logout, 
+        {'next_page': 'home'},
+        name='logout'
+    ),
+    url(r'^', include('note.urls')),
+    
 ]
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'

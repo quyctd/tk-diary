@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from note.models import Class, Diary, NotePrecise
+from note.models import Class, Diary, NotePrecise, UserProfile
 
 # Register your models here.
 class NotePreciseInline(admin.StackedInline):
@@ -29,3 +29,4 @@ class DiaryAdmin(admin.ModelAdmin):
 admin.site.register(Class)
 admin.site.register(Diary, DiaryAdmin)
 admin.site.register(NotePrecise)
+admin.site.register(UserProfile)

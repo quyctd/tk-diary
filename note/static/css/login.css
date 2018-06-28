@@ -27,9 +27,9 @@
   font-size: 14px;
 }
 
-.form select {
+/* .form select {
   pointer-events:none;
-}
+} */
 
 .form button {
   font-family: "Roboto", sans-serif;

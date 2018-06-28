@@ -75,17 +75,17 @@ WSGI_APPLICATION = 'diary.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-# mongodb://<dbuser>:<dbpassword>@ds163680.mlab.com:63680/tk-diary
+# mongodb://<dbuser>:<dbpassword>@ds217921.mlab.com:17921/diary
 
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'tk-diary',
-        'HOST': 'ds163680.mlab.com',
-        'PORT': 63680,
+        'NAME': 'diary',
+        'HOST': 'ds217921.mlab.com',
+        'PORT': 17921,
         'USER': 'admin',
-        'PASSWORD': '123.Abc@',
-        'AUTH_SOURCE': 'tk-diary',
+        'PASSWORD': 'admin123',
+        'AUTH_SOURCE': 'diary',
     }
 }
 
@@ -130,3 +130,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "note/static")  # '/note/static'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+LOGIN_REDIRECT_URL = 'home'

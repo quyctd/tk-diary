@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
@@ -7,7 +7,6 @@ from .forms import SignUpForm
 def index(request):
     classrooms = Class.objects.all()
     date_list = [d.time for d in Diary.objects.all()]
-    print(date_list)
     context = {
         'classrooms': classrooms,
         'date_list': date_list
@@ -33,7 +32,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
-            user.user_profile.headline = form.cleaned_data.get("headline")
+            user.userprofile.headline = form.cleaned_data.get("headline")
             user.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
