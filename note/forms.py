@@ -6,12 +6,9 @@ from .models import *
 
 
 class SignUpForm(UserCreationForm):
-    HEADLINE_CHOICES = (
-        ("Teacher", "Teacher"),
-        ("Supporter", "Supporter")
-    )
+    
     headline = forms.ChoiceField(
-        choices=HEADLINE_CHOICES, widget=forms.Select(),)
+        choices=HEADLINE_CHOICES, required = True)
 
     first_name = forms.CharField(
         max_length=30, required=False, help_text='Optional.')

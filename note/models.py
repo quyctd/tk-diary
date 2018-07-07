@@ -10,8 +10,8 @@ from django.dispatch import receiver
 class Class(models.Model):
     name_course = models.CharField(max_length = 255)
     number = models.IntegerField()
-    teacher = models.CharField(max_length = 255, blank = True)
-    support = models.CharField(max_length = 255, blank = True)
+    teacher = models.ForeignKey('UserProfile', limit_choices_to={'headline':"Teacher"}, on_delete = models.CASCADE, related_name="teacher")
+    support = models.ForeignKey('UserProfile', limit_choices_to={'headline':"Supporter"},on_delete = models.CASCADE, related_name = "supporter")
     def __str__(self):
         return self.name_course+" "+str(self.number)
     class Meta:
@@ -42,18 +42,23 @@ class NotePrecise(models.Model):
         verbose_name = 'Note Precise'
         verbose_name_plural = 'Note for each Student'
 
+HEADLINE_CHOICES = (
+        ("Teacher", "Teacher"),
+        ("Supporter", "Supporter"),
+        ("Manager", "Manager")
+    )
+
 class UserProfile(models.Model):
     user   = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    HEADLINE_CHOICES = (
-        ("Teacher", "Teacher"),
-        ("Supporter", "Supporter")
-    )
+    
     headline = models.CharField(
         max_length=255, choices=HEADLINE_CHOICES, default=HEADLINE_CHOICES[0])
 
     def __str__(self):
-        return self.user.username
-
+        if self.user.first_name and self.user.last_name:
+            return '%s %s' % (self.user.first_name, self.user.last_name)
+        else:
+            return self.user.username
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
