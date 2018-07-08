@@ -1,6 +1,11 @@
 <div class="container" style="margin-top:100px;">
     <div class="row">
         <div class="col-sm-8 px-5">
+            {% if classrooms == None %}
+            
+            <img src="https://flisebent.dk/wp-content/uploads/2017/11/preview.png" alt="" style="width: 100%">
+            
+            {% else %}
             {% for class in classrooms %}
             <div>
                 <a href="/class/{{class.pk}}" class="mb-3">
@@ -14,6 +19,7 @@
             </div>
             <hr>
             {% endfor %}
+            {% endif %}
         </div>
         <div class="col-sm-4">
             <div class="from-group mb-4">

@@ -7,7 +7,22 @@ from django.contrib.auth.models import Permission
 # Create your views here.
 
 def index(request):
-    classrooms = Class.objects.all()
+    user = request.user
+    classrooms = None
+    if not user.is_active:
+        print("Chưa đăng nhập")
+    else:
+        if user.userprofile.headline == "Manager" or user.is_superuser:
+            classrooms = Class.objects.all()
+            print("Super")
+        elif user.userprofile.headline == "Teacher":
+            classrooms = user.userprofile.teacher.all()
+            print("Teacher")
+        elif user.userprofile.headline == "Supporter":
+            classrooms = user.userprofile.supporter.all()
+            print("Support")
+
+    # classrooms = Class.objects.all()
     date_list = [d.time for d in Diary.objects.all()]
     date_list = sorted(date_list)
     context = {
@@ -20,7 +35,10 @@ def index(request):
 def detail(request, pk):
     classroom = get_object_or_404(Class, pk = pk)
     if classroom != None:
-        notes = classroom.diary.all().order_by('-time')
+        if request.user.userprofile.headline == "Supporter":
+            notes = classroom.diary.filter(author = request.user).order_by('-time')
+        else:
+            notes = classroom.diary.all().order_by('-time')
 
     context = {
         'classroom': classroom,

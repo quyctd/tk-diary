@@ -10,8 +10,8 @@ from django.dispatch import receiver
 class Class(models.Model):
     name_course = models.CharField(max_length = 255)
     number = models.IntegerField()
-    teacher = models.ForeignKey('UserProfile', limit_choices_to={'headline':"Teacher"}, on_delete = models.CASCADE, related_name="teacher")
-    support = models.ForeignKey('UserProfile', limit_choices_to={'headline':"Supporter"},on_delete = models.CASCADE, related_name = "supporter")
+    teacher = models.ForeignKey('UserProfile', limit_choices_to={'headline':"Teacher"}, on_delete = models.CASCADE, related_name="teacher", blank = True)
+    support = models.ForeignKey('UserProfile', limit_choices_to={'headline':"Supporter"},on_delete = models.CASCADE, related_name = "supporter", blank = True)
     def __str__(self):
         return self.name_course+" "+str(self.number)
     class Meta:
